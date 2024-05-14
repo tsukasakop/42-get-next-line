@@ -1,7 +1,9 @@
-*/**/*.o
-*/**/*.swp
-*/**/a.out
-*/**/*.DS_Store*
-*/**/*._*
-*/**/*.bk
+*.o
+*.a
+*.swp
+a.out
+Makefile
+.DS_Store*
+._*
+*.bk
 *.pdf
