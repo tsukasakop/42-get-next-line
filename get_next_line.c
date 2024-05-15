@@ -6,7 +6,7 @@
 /*   By: tkondo <tkondo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 00:36:07 by tkondo            #+#    #+#             */
-/*   Updated: 2024/05/16 02:05:31 by tkondo           ###   ########.fr       */
+/*   Updated: 2024/05/16 02:24:34 by tkondo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ static bool	pack(char **p_store, char *s)
 {
 	char	*bk;
 
+	if (*p_store == NULL)
+	{
+		*p_store = ft_substr("", 0, 0);
+		if (*p_store == NULL)
+			return (false);
+	}
 	bk = *p_store;
 	*p_store = ft_strjoin(*p_store, s);
 	free(bk);
@@ -30,13 +36,7 @@ static bool	read_and_pack(char **p_store, int fd)
 	char	buf[BUFFER_SIZE + 1];
 	ssize_t	read_bytes;
 
-	if (*p_store == NULL)
-	{
-		*p_store = ft_substr("", 0, 0);
-		if (*p_store == NULL)
-			return (false);
-	}
-	while (ft_strchr(*p_store, '\n') == NULL)
+	while (*p_store == NULL || ft_strchr(*p_store, '\n') == NULL)
 	{
 		read_bytes = read(fd, buf, BUFFER_SIZE);
 		if (read_bytes < 0)
