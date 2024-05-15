@@ -6,7 +6,7 @@
 /*   By: tkondo <tkondo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 00:36:07 by tkondo            #+#    #+#             */
-/*   Updated: 2024/05/16 03:32:26 by tkondo           ###   ########.fr       */
+/*   Updated: 2024/05/16 06:55:40 by tkondo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ char	*get_next_line(int fd)
 {
 	static char	*read_s;
 
+	if (BUFFER_SIZE <= 0 || BUFFER_SIZE > SIZE_MAX - 1)
+		return (NULL);
 	if (!read_and_pack(&read_s, fd))
 		return (nullize_free(&read_s));
 	return (extract_line(&read_s));
