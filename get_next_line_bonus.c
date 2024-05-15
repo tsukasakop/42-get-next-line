@@ -6,11 +6,12 @@
 /*   By: tkondo <tkondo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 00:36:07 by tkondo            #+#    #+#             */
-/*   Updated: 2024/05/16 07:08:43 by tkondo           ###   ########.fr       */
+/*   Updated: 2024/05/16 07:53:48 by tkondo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
+#include <limits.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -87,10 +88,10 @@ static char	*extract_line(char **p_store)
 
 char	*get_next_line(int fd)
 {
-	static char	*read_s[MAX_FILE_DESCRIPTOR + 1];
+	static char	*read_s[OPEN_MAX + 1];
 
 	if (BUFFER_SIZE <= 0 || BUFFER_SIZE > SIZE_MAX - 1 || fd < 0
-		|| fd > MAX_FILE_DESCRIPTOR)
+		|| fd > OPEN_MAX)
 		return (NULL);
 	if (!read_and_pack(read_s + fd, fd))
 		return (nullize_free(read_s + fd));
