@@ -6,7 +6,7 @@
 /*   By: tkondo <tkondo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 00:36:07 by tkondo            #+#    #+#             */
-/*   Updated: 2024/05/16 06:55:40 by tkondo           ###   ########.fr       */
+/*   Updated: 2024/05/16 07:08:58 by tkondo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,13 @@ static bool	pack(char **p_store, char *s)
 	char	*bk;
 
 	if (*p_store == NULL)
+		*p_store = ft_substr(s, 0, ft_strlen(s));
+	else
 	{
-		*p_store = ft_substr("", 0, 0);
-		if (*p_store == NULL)
-			return (false);
+		bk = *p_store;
+		*p_store = ft_strjoin(*p_store, s);
+		free(bk);
 	}
-	bk = *p_store;
-	*p_store = ft_strjoin(*p_store, s);
-	free(bk);
 	return (*p_store != NULL);
 }
 
