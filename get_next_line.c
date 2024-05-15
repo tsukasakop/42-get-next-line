@@ -6,7 +6,7 @@
 /*   By: tkondo <tkondo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 00:36:07 by tkondo            #+#    #+#             */
-/*   Updated: 2024/05/16 02:26:46 by tkondo           ###   ########.fr       */
+/*   Updated: 2024/05/16 02:32:53 by tkondo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static bool	read_and_pack(char **p_store, int fd)
 		read_bytes = read(fd, buf, BUFFER_SIZE);
 		if (read_bytes < 0)
 			return (false);
+		if (read_bytes == 0 && *p_store == NULL)
+			return (false);
 		buf[read_bytes] = '\0';
 		if (!pack(p_store, buf))
 			return (false);
@@ -61,7 +63,7 @@ static char	*extract_line(char **p_store)
 	p_end = *p_store + ft_strlen(*p_store);
 	origin = *p_store;
 	*p_store = NULL;
-	if (p_nl == NULL)
+	if (p_nl == NULL || p_nl + 1 == p_end)
 		line = ft_substr(origin, 0, p_end - origin);
 	else
 	{
