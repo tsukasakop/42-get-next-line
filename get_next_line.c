@@ -6,7 +6,7 @@
 /*   By: tkondo <tkondo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 00:36:07 by tkondo            #+#    #+#             */
-/*   Updated: 2024/05/16 02:04:32 by tkondo           ###   ########.fr       */
+/*   Updated: 2024/05/16 02:05:31 by tkondo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ static char	*extract_line(char **p_store)
 	{
 		line = ft_substr(origin, 0, p_nl - origin);
 		*p_store = ft_substr(origin, p_nl - origin + 1, p_end - p_nl);
-	}
-	if (line == NULL || *p_store == NULL)
-	{
-		free(line);
-		line = NULL;
-		free(*p_store);
-		*p_store = NULL;
+		if (line == NULL || *p_store == NULL)
+		{
+			free(line);
+			line = NULL;
+			free(*p_store);
+			*p_store = NULL;
+		}
 	}
 	free(origin);
 	return (line);
