@@ -6,7 +6,7 @@
 /*   By: tkondo <tkondo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 00:36:07 by tkondo            #+#    #+#             */
-/*   Updated: 2024/05/16 02:32:53 by tkondo           ###   ########.fr       */
+/*   Updated: 2024/05/16 03:32:26 by tkondo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+static char	*nullize_free(char **p)
+{
+	free(*p);
+	*p = NULL;
+	return (NULL);
+}
 
 static bool	pack(char **p_store, char *s)
 {
@@ -71,10 +78,8 @@ static char	*extract_line(char **p_store)
 		*p_store = ft_substr(origin, p_nl - origin + 1, p_end - p_nl);
 		if (line == NULL || *p_store == NULL)
 		{
-			free(line);
-			line = NULL;
-			free(*p_store);
-			*p_store = NULL;
+			nullize_free(&line);
+			nullize_free(p_store);
 		}
 	}
 	free(origin);
@@ -86,10 +91,6 @@ char	*get_next_line(int fd)
 	static char	*read_s;
 
 	if (!read_and_pack(&read_s, fd))
-	{
-		free(read_s);
-		read_s = NULL;
-		return (NULL);
-	}
+		return (nullize_free(&read_s));
 	return (extract_line(&read_s));
 }
