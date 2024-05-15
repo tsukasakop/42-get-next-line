@@ -6,7 +6,7 @@
 /*   By: tkondo <tkondo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 00:36:07 by tkondo            #+#    #+#             */
-/*   Updated: 2024/05/16 00:10:16 by tkondo           ###   ########.fr       */
+/*   Updated: 2024/05/16 01:34:47 by tkondo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ static bool	read_and_pack(char **p_store, int fd)
 		if (*p_store == NULL)
 			return (false);
 	}
-	buf[BUFFER_SIZE] = '\0';
 	while (ft_strchr(*p_store, '\n') == NULL)
 	{
 		read_bytes = read(fd, buf, BUFFER_SIZE);
 		if (read_bytes < 0)
 			return (false);
+		buf[read_bytes] = '\0';
 		if (!pack(p_store, buf))
 			return (false);
 		if (read_bytes < BUFFER_SIZE)
