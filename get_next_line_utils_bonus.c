@@ -6,7 +6,7 @@
 /*   By: tkondo <tkondo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 00:36:07 by tkondo            #+#    #+#             */
-/*   Updated: 2024/05/16 03:44:30 by tkondo           ###   ########.fr       */
+/*   Updated: 2024/05/16 06:58:38 by tkondo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	n_s1 = ft_strlen(s1);
 	n_s2 = ft_strlen(s2);
-	if (n_s1 >= SIZE_MAX - n_s1)
+	if (n_s1 >= SIZE_MAX - n_s2 - 1)
 		return (NULL);
 	p = malloc(n_s1 + n_s2 + 1);
 	if (p == NULL)
